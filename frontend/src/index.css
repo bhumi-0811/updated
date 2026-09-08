@@ -12,7 +12,40 @@ body {
 }
 
 h1, h2, h3, h4 {
-  @apply font-display;
+  @apply font-body;
+}
+
+/* One typeface is used across every interface element, including form controls. */
+button, input, textarea, select {
+  font-family: inherit;
+}
+
+/* A consistent tactile response for every existing button without changing its design. */
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]) {
+  transition: transform 220ms cubic-bezier(.2, .8, .2, 1), box-shadow 220ms ease, filter 220ms ease, background-color 220ms ease, color 220ms ease, border-color 220ms ease;
+  will-change: transform;
+}
+
+@media (hover: hover) {
+  button:not(:disabled):hover,
+  [role="button"]:not([aria-disabled="true"]):hover {
+    transform: translateY(-3px) scale(1.025);
+    filter: brightness(1.04);
+    box-shadow: 0 12px 24px -14px rgba(23, 86, 85, 0.55);
+  }
+}
+
+button:not(:disabled):active,
+[role="button"]:not([aria-disabled="true"]):active {
+  transform: translateY(1px) scale(0.96);
+  animation: button-pulse 360ms cubic-bezier(.2, .8, .2, 1);
+}
+
+@keyframes button-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(47, 143, 134, 0.42); }
+  70% { box-shadow: 0 0 0 12px rgba(47, 143, 134, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(47, 143, 134, 0); }
 }
 
 ::selection {
@@ -63,6 +96,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 img {
   max-width: 100%;
   height: auto;
+}
+
+/* Keep the supplied Why Vijaya Clinic artwork visually consistent with the teal palette. */
+.icon-teal {
+  filter: brightness(0) saturate(100%) invert(34%) sepia(21%) saturate(1553%) hue-rotate(128deg) brightness(93%) contrast(88%);
 }
 
 /* Custom scrollbar */

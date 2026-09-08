@@ -18,7 +18,7 @@ export default function Hero() {
         />
         {/* Static fallback for reduced-motion preference - same framing, no motion */}
         <img src={heroPoster} alt="" className="hidden h-full w-full object-cover motion-reduce:block" />
-        <div className="absolute inset-0 bg-gradient-to-b from-teal-900/75 via-teal-800/55 to-teal-900/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-teal-900/20 via-teal-800/20 to-teal-900/20" />
       </div>
 
       <div className="relative flex h-full flex-col items-center justify-center px-6 text-center">

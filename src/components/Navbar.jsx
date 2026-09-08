@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X, Phone } from 'lucide-react'
-import logo from '../assets/logo.jpg'
+import logo from '../assets/logo.png'
 import { useSiteData } from '../context/SiteDataContext.jsx'
 
 const links = [
@@ -38,7 +38,7 @@ export default function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8 lg:py-4">
         <Link to="/" className="flex min-w-0 items-center gap-2.5 sm:gap-3" onClick={() => setOpen(false)}>
-          <img src={logo} alt="Vijaya Clinics logo" className="h-9 w-9 shrink-0 rounded-full object-cover shadow-soft sm:h-11 sm:w-11" />
+          <img src={logo} alt="Vijaya Clinics logo" className="h-9 w-9 shrink-0 object-contain shadow-soft sm:h-11 sm:w-11" />
           <div className="min-w-0 leading-tight">
             <p className={`truncate font-display text-base font-semibold sm:text-lg ${transparent ? 'text-white' : 'text-teal-700'}`}>
               Vijaya Clinics

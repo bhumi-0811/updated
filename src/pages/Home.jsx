@@ -181,7 +181,7 @@ export default function Home() {
       </div>
 
       {/* Patient stories */}
-      <section className="py-24">
+      {/* <section className="py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeading eyebrow="Patient Stories" title="What patients tell us" />
           <div className="mt-14 grid gap-16 lg:grid-cols-2">
@@ -195,7 +195,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Why Vijaya Clinics */}
       <section className="bg-sand-50 py-24">

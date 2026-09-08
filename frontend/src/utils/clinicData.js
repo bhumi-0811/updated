@@ -25,7 +25,7 @@ export const dermatologist = {
   role: 'Founder & Chief Consultant Dermatologist, Vijaya Clinics',
   registration: 'Maharashtra Medical Council - Reg. No. 2017051754',
   qualifications: ['MBBS', 'DDV (Mumbai)', 'PGDCC (Pune)'],
-  experienceYears: 11,
+  experienceYears: 7,
   languages: ['English', 'Hindi', 'Marathi'],
   bio: 'Dr. Amit Nikam is the Founder of Vijaya Clinics and its Chief Consultant Dermatologist. He has a special interest in clinical skin conditions such as tinea, acne, psoriasis, eczema, alopecia, pigmentation and melasma. His vision is to make quality skin care affordable and accessible - the clinic is equipped with modern technology suited to Indian skin, including laser hair reduction, chemical peels, carbon laser peel, HydraFacial and photofacial.',
   concerns: [
@@ -129,112 +129,10 @@ export const dermatologyProcess = [
 ]
 
 export const stats = [
-  { label: 'Years - Dermatology', value: 11, suffix: '+' },
+  { label: 'Years - Dermatology', value: 7, suffix: '+' },
   { label: 'Years - Psychiatry', value: 7, suffix: '+' },
   { label: 'Skin Procedures', value: 150, suffix: '+' },
   { label: 'Patients Cared For', value: 5, suffix: 'k+' },
-]
-
-// Testimonials paraphrased from public Google reviews on each doctor's listing.
-export const dermatologyReviews = [
-  { name: 'Shubham Bawankule', rating: 5, comment: 'One of the best experiences I\u2019ve had with skin care treatment.' },
-  { name: 'Rahul Gour', rating: 5, comment: 'Dr. Nikam explained every treatment option clearly, and the clinic is spotless and well-kept.' },
-  { name: 'Zainab Maimoon', rating: 5, comment: 'Treated for three months and saw real, lasting improvement - would recommend him for acne and pigmentation.' },
-]
-
-export const psychiatryReviews = [
-  { name: 'Krishna', rating: 5, comment: 'It\u2019s so easy to talk to her and be honest about how I\u2019m feeling - the treatment has worked wonderfully for me.' },
-  { name: 'Sanskruti Gujar', rating: 5, comment: 'I could feel real change within a few months, thanks to how deeply she understands each situation.' },
-  { name: 'Dhananjay Gurve', rating: 5, comment: 'Feeling calmer with every visit after years of consulting different psychiatrists - this has been the best experience.' },
-]
-
-// TODO: Replace with real blog posts once provided. `image` refers to a key in
-// the imageMap defined in Blog.jsx / BlogDetail.jsx - swap in new asset imports there.
-export const blogPosts = [
-  {
-    slug: 'sunscreen-guide-nagpur-summer',
-    title: 'How to Choose the Right Sunscreen for Your Skin Type',
-    category: 'Dermatology',
-    author: dermatologist.name,
-    date: '2026-05-10',
-    image: 'treatment-room',
-    excerpt: 'Not all sunscreens suit all skin types. Here is how to pick one that protects without clogging pores or triggering breakouts.',
-    content: [
-      'Sun protection is one of the simplest, most effective things you can do for your skin - but the wrong formula can leave oily skin greasier or dry skin tighter than before.',
-      'For oily and acne-prone skin, look for gel or water-based, non-comedogenic sunscreens with an SPF of 30 or higher. For dry skin, cream-based formulas with added hydration work best.',
-      'Whatever the formula, reapplication every 3-4 hours during sun exposure matters more than the SPF number alone. If you are unsure what suits your skin, a quick consultation can save months of trial and error.',
-    ],
-  },
-  {
-    slug: 'acne-scars-treatment-options',
-    title: 'Acne Scars: What Treatment Options Actually Work',
-    category: 'Dermatology',
-    author: dermatologist.name,
-    date: '2026-04-18',
-    image: 'gallery-beforeafter',
-    excerpt: 'From chemical peels to microneedling, a look at which acne scar treatments suit which scar types - and realistic timelines for results.',
-    content: [
-      'Acne scars are not one condition - ice-pick, boxcar, and rolling scars all respond differently to treatment, which is why a proper assessment matters before starting any procedure.',
-      'Chemical peels and microneedling work well for shallow, rolling scars, while deeper ice-pick scars often need more targeted approaches.',
-      'Most patients see visible improvement over 3-6 sessions spaced a few weeks apart, with continued improvement for months afterward as collagen rebuilds.',
-    ],
-  },
-  {
-    slug: 'hair-fall-causes-solutions',
-    title: 'Hair Fall in Your 20s and 30s: Common Causes',
-    category: 'Dermatology',
-    author: dermatologist.name,
-    date: '2026-03-22',
-    image: 'doctor-desk',
-    excerpt: 'Stress, nutrition, thyroid changes and genetics can all show up as hair fall. Here is how to figure out what is actually behind yours.',
-    content: [
-      'Noticing more hair on your pillow or in the shower drain is unsettling, but hair fall in younger adults usually has an identifiable, treatable cause.',
-      'Common contributors include iron and vitamin D deficiency, thyroid imbalance, chronic stress, and early-onset pattern hair loss.',
-      'A simple set of blood tests alongside a scalp examination usually points to the cause, which then guides whether the right next step is nutritional correction, topical treatment, or PRP therapy.',
-    ],
-  },
-  {
-    slug: 'understanding-anxiety-vs-everyday-stress',
-    title: 'Anxiety vs. Everyday Stress: Knowing the Difference',
-    category: 'Psychiatry',
-    author: psychiatrist.name,
-    date: '2026-05-02',
-    image: 'counselling-room',
-    excerpt: 'Everyone feels stressed sometimes. Here is how to tell when it has crossed into something that deserves professional support.',
-    content: [
-      'Stress is a normal response to a demanding situation - it usually eases once the situation resolves. Anxiety can persist even when nothing is obviously wrong, and often comes with physical symptoms like a racing heart or disrupted sleep.',
-      'A useful marker is duration and interference: if worry is present most days for weeks, and it is affecting work, relationships or sleep, it is worth talking to someone.',
-      'Anxiety disorders are highly treatable with the right combination of therapy and, where needed, medication - there is no need to wait until things feel unmanageable.',
-    ],
-  },
-  {
-    slug: 'supporting-a-loved-one-with-depression',
-    title: 'How to Support a Loved One With Depression',
-    category: 'Psychiatry',
-    author: psychiatrist.name,
-    date: '2026-04-11',
-    image: 'marketing-poster',
-    excerpt: 'Practical, compassionate ways to be present for someone going through depression - without trying to fix it for them.',
-    content: [
-      'Depression can be isolating, both for the person experiencing it and for the people who care about them and are not sure what to say or do.',
-      'Simple, consistent presence often matters more than advice - checking in without pressure, listening without judgement, and gently encouraging professional support when the time feels right.',
-      'It is also important for caregivers to look after their own wellbeing. Supporting someone through depression is easier to sustain when you are not running on empty yourself.',
-    ],
-  },
-  {
-    slug: 'when-to-see-a-psychiatrist',
-    title: 'When Should You See a Psychiatrist?',
-    category: 'Psychiatry',
-    author: psychiatrist.name,
-    date: '2026-03-05',
-    image: 'reception',
-    excerpt: 'There is no threshold you need to cross before seeking help. Here is a clear, practical guide to when a consultation makes sense.',
-    content: [
-      'Many people delay seeking psychiatric care because they feel their struggles are not "serious enough" - but early support often leads to easier, faster recovery.',
-      'Persistent low mood, sleep disruption, loss of interest in things you used to enjoy, or difficulty coping with daily responsibilities are all valid reasons to book a consultation.',
-      'A first visit is simply a conversation - there is no obligation, and everything discussed stays private.',
-    ],
-  },
 ]
 
 export const faqs = [

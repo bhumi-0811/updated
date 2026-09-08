@@ -91,3 +91,32 @@ Settings). Note the public site no longer lets patients book appointments,
 so the Appointments/Availability admin sections will only show bookings
 made through other channels (phone, WhatsApp, walk-in) if you're manually
 adding them, or via the WhatsApp bot if that's been set up separately.
+
+## Update: UI Polish + AI Chatbot + Content Cleanup
+
+- **Hero overlay** reduced to ~15% opacity - the clinic video is now clearly visible, with a subtle top/bottom edge gradient plus text drop-shadow kept for legibility.
+- **New logo** applied everywhere (navbar, footer, admin sidebar, admin login) - on a white circular badge so it stays legible on both light and dark backgrounds. The logo files are `frontend/src/assets/logo-icon.png` (compact, used across the site) and `logo-full.png` (full wordmark, available if you want it somewhere larger later, e.g. an official letterhead/print asset).
+- **Hero clinic name** now styled to match your logo's wordmark (Playfair Display serif, tracked-out gold "CLINICS" with flanking rule lines) - responsive across desktop and mobile.
+- **AI chatbot** - new floating button (sparkle icon, teal/mint gradient) next to WhatsApp and Call. Opens a chat panel that answers questions using your clinic's real data (doctors, treatments, hours, FAQs). Works out of the box with simple FAQ matching; add `ANTHROPIC_API_KEY` to `backend/.env` for full conversational AI answers (get a key at console.anthropic.com).
+- **Contact form removed** - Contact page now leads with a "Chat on WhatsApp" button instead. (The backend's contact-message storage and admin "Messages" section are untouched in case you still want them for other uses, but nothing on the public site submits to them anymore.)
+- **Dr. Amit's real photo** added (from the video call screenshot you sent) - used across Home and the Dermatology page. It's a screenshot crop so resolution is modest; a higher-res photo would look sharper.
+- **Experience updated to "7+ Years"** for Dr. Amit, per your instruction (was showing 11, sourced from his public listing) - updated everywhere it appears (Dermatology page, homepage stats, backend seed default).
+- **Reviews removed completely** - no Reviews page, no testimonial carousels, no review data anywhere on the public site.
+- **Gallery images now perfectly uniform** - every card is exactly the same size (verified 374×540px at desktop width) using a fixed aspect ratio + `object-fit: cover`.
+- **"Two Specialities, One Clinic" section removed** - homepage now just shows a plain "Meet Our Specialists" heading, then flows straight into the Dermatology and Psychiatry preview sections (unchanged, as instructed).
+- **Footer cleanup** - Terms, Privacy Policy, and the Admin Login link are gone. Quick Links now sit in a clean 2-column grid instead of a single list.
+
+### Note on Admin Login access
+Since the footer link is removed, there's no visible way to reach the admin dashboard from the public site anymore. It's still fully functional - just bookmark or type the URL directly:
+```
+https://your-site-url/#/admin/login
+```
+
+## Update: Chatbot Removed, Footer Redesigned
+
+- **AI chatbot removed completely** - the floating button, chat panel component, and backend `/api/chatbot` endpoint are all gone. Only WhatsApp and Call remain as floating buttons.
+- **Footer redesigned** to feel more premium and complete:
+  - Now a 4-column layout: Brand & socials, Quick Links, Contact & Hours, and a **live Google Map** with a "Get Directions" link (same map as the Contact page).
+  - Added clinic opening hours directly in the footer.
+  - Subtle glow/gradient background and a soft top accent line for a more polished, less flat look.
+  - Link hover states got a small arrow micro-interaction to match the site's premium feel.

@@ -8,12 +8,12 @@ import ClinicValues from '../components/ClinicValues.jsx'
 import TestimonialCarousel from '../components/TestimonialCarousel.jsx'
 import { dermatologist, allTreatments, dermatologyProcess, dermatologyReviews } from '../utils/clinicData.js'
 import { useSiteData } from '../context/SiteDataContext.jsx'
-import doctorImgFallback from '../assets/doctor-desk.jpg'
+import doctorImgFallback from '../assets/dr.png'
 import treatmentRoomImg from '../assets/treatment-room.jpg'
 
 export default function Dermatology() {
   const { settings: clinic, doctor, treatments } = useSiteData()
-  const photo = doctor.photoUrl || doctorImgFallback
+  const photo = doctorImg;
   const treatmentList = (treatments.length ? treatments : allTreatments).slice(0, 9)
 
   return (
@@ -24,7 +24,7 @@ export default function Dermatology() {
           <div>
             <div className="flex flex-wrap items-center gap-2.5">
               <span className="rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-mint-200">Dermatology</span>
-              <span className="rounded-full bg-mint-400 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-teal-900">{dermatologist.experienceYears}+ Years</span>
+              <span className="rounded-full bg-mint-400 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-teal-900">7+ Years</span>
             </div>
             <h1 className="mt-4 font-display text-4xl font-semibold text-white sm:text-5xl">{dermatologist.name}</h1>
             <p className="mt-2 text-white/80">{dermatologist.role}</p>
@@ -132,14 +132,14 @@ export default function Dermatology() {
       </section>
 
       {/* Reviews */}
-      <section className="py-24">
+      {/* <section className="py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeading eyebrow="Patient Stories" title="Dermatology Reviews" />
           <div className="mt-14">
             <TestimonialCarousel reviews={dermatologyReviews} accent="teal" />
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Contact CTA */}
       <section className="bg-teal-800 py-16 text-center text-white">

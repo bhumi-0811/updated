@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Instagram, Facebook, Youtube, MapPin, Phone, Mail, Clock, ChevronRight } from 'lucide-react'
-import logo from '../assets/logo.jpg'
+import logo from '../assets/logo.png'
 import { useSiteData } from '../context/SiteDataContext.jsx'
 
 const quickLinks = [
@@ -38,7 +38,7 @@ export default function Footer() {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 py-14 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div>
           <div className="flex items-center gap-3">
-            <img src={logo} alt="Vijaya Clinics" className="h-10 w-10 rounded-full object-cover" />
+            <img src={logo} alt="Vijaya Clinics" className="h-10 w-10 object-contain" />
             <p className="font-display text-lg font-semibold">Vijaya Clinics</p>
           </div>
           <p className="mt-4 text-sm text-white/70">Centre for Skin &amp; Mental Health - where dermatology meets calm, careful attention.</p>

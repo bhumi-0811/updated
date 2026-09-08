@@ -34,8 +34,9 @@ export default {
         gold: '#C9A15A',
       },
       fontFamily: {
-        display: ['"Fraunces"', 'serif'],
+        display: ['"Inter"', 'sans-serif'],
         body: ['"Inter"', 'sans-serif'],
+        logo: ['"Inter"', 'sans-serif'],
       },
       backgroundImage: {
         'teal-fade': 'linear-gradient(135deg, #175655 0%, #2F8F86 50%, #79CCBB 100%)',

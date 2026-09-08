@@ -5,7 +5,7 @@ import {
   LogOut, Menu, X,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext.jsx'
-import logo from '../../assets/logo.jpg'
+import logo from '../../assets/vijaya-clinics-logo.png'
 
 const navItems = [
   { to: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -33,7 +33,9 @@ export default function AdminLayout({ children, title }) {
       {/* Mobile top bar */}
       <div className="fixed inset-x-0 top-0 z-40 flex h-16 items-center justify-between bg-teal-800 px-4 lg:hidden">
         <div className="flex min-w-0 items-center gap-2.5">
-          <img src={logo} alt="" className="h-8 w-8 shrink-0 rounded-full object-cover" />
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-1">
+              <img src={logo} alt="" className="h-full w-full scale-150 object-contain" />
+          </span>
           <span className="truncate font-display text-sm font-semibold text-white">Vijaya Admin</span>
         </div>
         <button onClick={() => setOpen((o) => !o)} className="shrink-0 text-white" aria-label="Toggle menu">
@@ -48,7 +50,9 @@ export default function AdminLayout({ children, title }) {
         }`}
       >
         <div className="hidden shrink-0 items-center gap-3 border-b border-white/10 px-6 py-6 lg:flex">
-          <img src={logo} alt="Vijaya Clinics" className="h-10 w-10 shrink-0 rounded-full object-cover" />
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-1.5">
+            <img src={logo} alt="Vijaya Clinics" className="h-full w-full scale-150 object-contain" />
+          </span>
           <div className="min-w-0">
             <p className="truncate font-display text-sm font-semibold text-white">Vijaya Clinics</p>
             <p className="truncate text-xs text-white/60">Admin Dashboard</p>

@@ -11,7 +11,7 @@ import Treatments from './pages/Treatments.jsx'
 import TreatmentDetail from './pages/TreatmentDetail.jsx'
 import Blog from './pages/Blog.jsx'
 import BlogDetail from './pages/BlogDetail.jsx'
-import Reviews from './pages/Reviews.jsx'
+// import Reviews from './pages/Reviews.jsx'
 import FAQ from './pages/FAQ.jsx'
 import Contact from './pages/Contact.jsx'
 import NotFound from './pages/NotFound.jsx'
@@ -22,7 +22,7 @@ import AdminDashboard from './admin/pages/Dashboard.jsx'
 import AdminAppointments from './admin/pages/Appointments.jsx'
 import AdminAvailability from './admin/pages/AvailabilityAdmin.jsx'
 import AdminMessages from './admin/pages/Messages.jsx'
-import AdminReviews from './admin/pages/ReviewsAdmin.jsx'
+// import AdminReviews from './admin/pages/ReviewsAdmin.jsx'
 import AdminWebsite from './admin/pages/WebsiteManagement.jsx'
 import AdminDoctorProfile from './admin/pages/DoctorProfileAdmin.jsx'
 import AdminSettings from './admin/pages/SettingsPage.jsx'
@@ -65,7 +65,7 @@ export default function App() {
         <Route path="/treatments/:slug" element={<PublicLayout><TreatmentDetail /></PublicLayout>} />
         <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
         <Route path="/blog/:slug" element={<PublicLayout><BlogDetail /></PublicLayout>} />
-        <Route path="/reviews" element={<PublicLayout><Reviews /></PublicLayout>} />
+        {/* <Route path="/reviews" element={<PublicLayout><Reviews /></PublicLayout>} /> */}
         <Route path="/faq" element={<PublicLayout><FAQ /></PublicLayout>} />
         <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
 
@@ -76,7 +76,7 @@ export default function App() {
         <Route path="/admin/appointments" element={<ProtectedRoute><AdminAppointments /></ProtectedRoute>} />
         <Route path="/admin/availability" element={<ProtectedRoute><AdminAvailability /></ProtectedRoute>} />
         <Route path="/admin/messages" element={<ProtectedRoute><AdminMessages /></ProtectedRoute>} />
-        <Route path="/admin/reviews" element={<ProtectedRoute><AdminReviews /></ProtectedRoute>} />
+        {/* <Route path="/admin/reviews" element={<ProtectedRoute><AdminReviews /></ProtectedRoute>} /> */}
         <Route path="/admin/website" element={<ProtectedRoute><AdminWebsite /></ProtectedRoute>} />
         <Route path="/admin/doctor-profile" element={<ProtectedRoute><AdminDoctorProfile /></ProtectedRoute>} />
         <Route path="/admin/settings" element={<ProtectedRoute><AdminSettings /></ProtectedRoute>} />

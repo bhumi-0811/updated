@@ -5,7 +5,7 @@ import {
   LogOut, Menu, X,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext.jsx'
-import logo from '../../assets/logo.jpg'
+import logo from '../../assets/logo.png'
 
 const navItems = [
   { to: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -48,7 +48,7 @@ export default function AdminLayout({ children, title }) {
         }`}
       >
         <div className="hidden shrink-0 items-center gap-3 border-b border-white/10 px-6 py-6 lg:flex">
-          <img src={logo} alt="Vijaya Clinics" className="h-10 w-10 shrink-0 rounded-full object-cover" />
+          <img src={logo} alt="Vijaya Clinics" className="h-10 w-10 shrink-0 object-contain" />
           <div className="min-w-0">
             <p className="truncate font-display text-sm font-semibold text-white">Vijaya Clinics</p>
             <p className="truncate text-xs text-white/60">Admin Dashboard</p>

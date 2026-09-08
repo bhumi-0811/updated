@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Phone } from 'lucide-react'
-import logo from '../assets/logo.jpg'
-import { useSiteData } from '../context/SiteDataContext.jsx'
+import { Menu, X } from 'lucide-react'
+import logo from '../assets/vijaya-clinics-logo.png'
 
 const links = [
   { to: '/', label: 'Home' },
   { to: '/dermatology', label: 'Dermatology' },
   { to: '/psychiatry', label: 'Psychiatry' },
-  { to: '/blog', label: 'Blog' },
   { to: '/contact', label: 'Contact' },
 ]
 
@@ -16,7 +14,6 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
-  const { settings: clinic } = useSiteData()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -38,7 +35,9 @@ export default function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8 lg:py-4">
         <Link to="/" className="flex min-w-0 items-center gap-2.5 sm:gap-3" onClick={() => setOpen(false)}>
-          <img src={logo} alt="Vijaya Clinics logo" className="h-9 w-9 shrink-0 rounded-full object-cover shadow-soft sm:h-11 sm:w-11" />
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-1.5 shadow-soft sm:h-11 sm:w-11">
+            <img src={logo} alt="Vijaya Clinics logo" className="h-full w-full scale-150 object-contain" />
+          </span>
           <div className="min-w-0 leading-tight">
             <p className={`truncate font-display text-base font-semibold sm:text-lg ${transparent ? 'text-white' : 'text-teal-700'}`}>
               Vijaya Clinics
@@ -49,14 +48,14 @@ export default function Navbar() {
           </div>
         </Link>
 
-        <div className="hidden items-center gap-7 lg:flex">
+        <div className="hidden items-center gap-8 lg:flex">
           {links.map((l) => {
-            const active = l.to === '/' ? location.pathname === '/' : location.pathname.startsWith(l.to)
+            const active = location.pathname === l.to
             return (
               <Link
                 key={l.label}
                 to={l.to}
-                className={`relative text-xs font-semibold uppercase tracking-[0.12em] transition-colors ${
+                className={`relative text-sm font-medium transition-colors ${
                   transparent
                     ? active ? 'text-white' : 'text-white/80 hover:text-white'
                     : active ? 'text-teal-700' : 'text-ink/70 hover:text-teal-600'
@@ -69,21 +68,6 @@ export default function Navbar() {
               </Link>
             )
           })}
-
-          <a
-            href={`tel:${clinic.phone}`}
-            className={`flex items-center gap-2.5 rounded-full py-1.5 pl-1.5 pr-4 transition ${
-              transparent ? 'bg-white/10 hover:bg-white/20' : 'bg-teal-50 hover:bg-teal-100'
-            }`}
-          >
-            <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${transparent ? 'bg-white/20 text-white' : 'bg-teal-fade text-white'}`}>
-              <Phone size={14} />
-            </span>
-            <span className="leading-tight">
-              <span className={`block text-[10px] uppercase tracking-wide ${transparent ? 'text-white/70' : 'text-teal-500'}`}>Book Appointment</span>
-              <span className={`block text-xs font-semibold ${transparent ? 'text-white' : 'text-teal-800'}`}>{clinic.phone}</span>
-            </span>
-          </a>
         </div>
 
         <button
@@ -100,31 +84,19 @@ export default function Navbar() {
         <div id="mobileNav" className="glass border-t border-teal-100 px-5 pb-6 pt-2 lg:hidden">
           <div className="flex flex-col gap-1">
             {links.map((l) => {
-              const active = l.to === '/' ? location.pathname === '/' : location.pathname.startsWith(l.to)
+              const active = location.pathname === l.to
               return (
                 <Link
                   key={l.label}
                   to={l.to}
                   onClick={() => setOpen(false)}
-                  className={`rounded-lg px-3 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] ${active ? 'bg-teal-50 text-teal-700' : 'text-ink/70'}`}
+                  className={`rounded-lg px-3 py-2.5 text-sm font-medium ${active ? 'bg-teal-50 text-teal-700' : 'text-ink/70'}`}
                 >
                   {l.label}
                 </Link>
               )
             })}
           </div>
-          <a
-            href={`tel:${clinic.phone}`}
-            className="mt-4 flex items-center gap-2.5 rounded-full bg-teal-50 py-2 pl-2 pr-4"
-          >
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-teal-fade text-white">
-              <Phone size={15} />
-            </span>
-            <span className="leading-tight">
-              <span className="block text-[10px] uppercase tracking-wide text-teal-500">Book Appointment</span>
-              <span className="block text-sm font-semibold text-teal-800">{clinic.phone}</span>
-            </span>
-          </a>
         </div>
       )}
     </header>

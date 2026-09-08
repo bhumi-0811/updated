@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Loader2, Lock, Mail, Eye, EyeOff } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext.jsx'
-import logo from '../../assets/logo.jpg'
+import logo from '../../assets/logo.png'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -33,7 +33,7 @@ export default function Login() {
     <div className="flex min-h-screen items-center justify-center bg-teal-fade px-4">
       <div className="w-full max-w-sm rounded-3xl bg-white p-8 shadow-soft">
         <div className="flex flex-col items-center text-center">
-          <img src={logo} alt="Vijaya Clinics" className="h-14 w-14 rounded-full object-cover shadow-card" />
+          <img src={logo} alt="Vijaya Clinics" className="h-14 w-14 object-contain shadow-card" />
           <h1 className="mt-4 font-display text-xl font-semibold text-teal-800">Doctor / Admin Login</h1>
           <p className="mt-1 text-sm text-ink/60">Vijaya Clinics Dashboard</p>
         </div>

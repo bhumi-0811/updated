@@ -1,7 +1,7 @@
-import { MapPin, Phone, Mail, Clock } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading.jsx'
-import ContactForm from '../components/ContactForm.jsx'
 import { useSiteData } from '../context/SiteDataContext.jsx'
+import whatsappIcon from '../assets/whatsapp-icon-clean.png'
 
 export default function Contact() {
   const { settings: clinic } = useSiteData()
@@ -13,12 +13,26 @@ export default function Contact() {
         <p className="mx-auto mt-3 max-w-xl text-white/85">We're here to help - reach out any way that's easiest for you.</p>
       </section>
 
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <div className="mx-auto max-w-5xl px-6 py-16 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2">
           <div>
-            <SectionHeading eyebrow="Get in Touch" title="Send us a message" />
-            <div className="mt-8">
-              <ContactForm />
+            <SectionHeading eyebrow="Get in Touch" title="Chat with us" />
+            <div className="mt-8 rounded-3xl border border-teal-100 bg-white p-8 text-center shadow-card">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366]/10 p-3">
+                <img src={whatsappIcon} alt="WhatsApp" className="h-full w-full object-contain" />
+              </div>
+              <p className="mt-5 font-display text-xl font-semibold text-teal-800">Chat on WhatsApp</p>
+              <p className="mt-2 text-sm text-ink/65">
+                The quickest way to reach us - message us directly and our team will respond as soon as possible.
+              </p>
+              <a
+                href={`https://wa.me/91${clinic.phone}`}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-7 py-3.5 font-semibold text-white shadow-soft transition hover:scale-105"
+              >
+                <MessageCircle size={18} /> Chat on WhatsApp
+              </a>
             </div>
           </div>
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { MessageCircle, Phone, ArrowUp } from 'lucide-react'
+import { Phone, ArrowUp } from 'lucide-react'
 import { useSiteData } from '../context/SiteDataContext.jsx'
 
 export default function FloatingButtons() {
@@ -26,16 +26,6 @@ export default function FloatingButtons() {
           <ArrowUp size={18} />
         </button>
       )}
-      <a
-        href={`https://wa.me/91${clinic.phone}`}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Chat on WhatsApp"
-        className="rounded-full bg-[#25D366] p-3 text-white shadow-card transition hover:scale-110 sm:p-3.5"
-      >
-        <MessageCircle size={18} className="sm:hidden" />
-        <MessageCircle size={20} className="hidden sm:block" />
-      </a>
       <a
         href={`tel:${clinic.phone}`}
         aria-label="Call clinic"

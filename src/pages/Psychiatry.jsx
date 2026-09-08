@@ -201,14 +201,14 @@ export default function Psychiatry() {
       </section>
 
       {/* Reviews */}
-      <section className="py-24">
+      {/* <section className="py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeading eyebrow="Patient Stories" title="Psychiatry Reviews" />
           <div className="mt-14">
             <TestimonialCarousel reviews={psychiatryReviews} accent="mint" />
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Contact CTA */}
       <section className="bg-teal-800 py-16 text-center text-white">

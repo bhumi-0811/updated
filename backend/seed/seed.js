@@ -53,7 +53,7 @@ async function seed() {
       qualifications: ['MBBS - Jawaharlal Nehru Medical College, Sawangi, Wardha', 'DDV - College of Physicians and Surgeons, Mumbai'],
       specializations: ['Clinical Dermatology', 'Aesthetic & Cosmetic Treatments', 'Hair & Scalp Disorders', 'Mental Wellness Counselling'],
       languages: ['English', 'Hindi', 'Marathi'],
-      experienceYears: 12,
+      experienceYears: 7,
     })
   }
 

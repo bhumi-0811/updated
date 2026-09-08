@@ -9,9 +9,6 @@ import Dermatology from './pages/Dermatology.jsx'
 import Psychiatry from './pages/Psychiatry.jsx'
 import Treatments from './pages/Treatments.jsx'
 import TreatmentDetail from './pages/TreatmentDetail.jsx'
-import Blog from './pages/Blog.jsx'
-import BlogDetail from './pages/BlogDetail.jsx'
-import Reviews from './pages/Reviews.jsx'
 import FAQ from './pages/FAQ.jsx'
 import Contact from './pages/Contact.jsx'
 import NotFound from './pages/NotFound.jsx'
@@ -59,13 +56,9 @@ export default function App() {
         {/* Old links redirect forward instead of 404-ing */}
         <Route path="/doctor-profile" element={<Navigate to="/dermatology" replace />} />
         <Route path="/appointment" element={<Navigate to="/contact" replace />} />
-        {/* About page retired - its content now lives on the specialist pages */}
-        <Route path="/about" element={<Navigate to="/dermatology" replace />} />
         <Route path="/treatments" element={<PublicLayout><Treatments /></PublicLayout>} />
         <Route path="/treatments/:slug" element={<PublicLayout><TreatmentDetail /></PublicLayout>} />
-        <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
-        <Route path="/blog/:slug" element={<PublicLayout><BlogDetail /></PublicLayout>} />
-        <Route path="/reviews" element={<PublicLayout><Reviews /></PublicLayout>} />
+        <Route path="/reviews" element={<Navigate to="/" replace />} />
         <Route path="/faq" element={<PublicLayout><FAQ /></PublicLayout>} />
         <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
 
