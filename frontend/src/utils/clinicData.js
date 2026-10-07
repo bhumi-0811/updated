@@ -25,7 +25,7 @@ export const dermatologist = {
   role: 'Founder & Chief Consultant Dermatologist, Vijaya Clinics',
   registration: 'Maharashtra Medical Council - Reg. No. 2017051754',
   qualifications: ['MBBS', 'DDV (Mumbai)', 'PGDCC (Pune)'],
-  experienceYears: 7,
+  experienceYears: 8,
   languages: ['English', 'Hindi', 'Marathi'],
   bio: 'Dr. Amit Nikam is the Founder of Vijaya Clinics and its Chief Consultant Dermatologist. He has a special interest in clinical skin conditions such as tinea, acne, psoriasis, eczema, alopecia, pigmentation and melasma. His vision is to make quality skin care affordable and accessible - the clinic is equipped with modern technology suited to Indian skin, including laser hair reduction, chemical peels, carbon laser peel, HydraFacial and photofacial.',
   concerns: [
@@ -41,7 +41,7 @@ export const psychiatrist = {
   role: 'Director & Chief Consultant, Vijaya Clinics',
   registration: 'Maharashtra Medical Council - Reg. No. 2018115808',
   qualifications: ['MBBS', 'DPM'],
-  experienceYears: 7,
+  experienceYears: 5,
   languages: ['English', 'Hindi', 'Marathi'],
   bio: 'Dr. Pritisha Saxena Nikam is a dedicated Psychiatrist and Therapist serving as Director & Chief Consultant at Vijaya Clinics. She provides personalised, evidence-based care for mental health challenges and relationship concerns, integrating psychotherapeutic approaches like CBT and DBT with thoughtful medication management. She has been featured in publications including The Times of India, India Times and Dainik Bhaskar for her contributions to mental health awareness, and regularly conducts workshops and online initiatives aimed at reducing stigma and promoting emotional resilience.',
   concerns: [
@@ -129,10 +129,10 @@ export const dermatologyProcess = [
 ]
 
 export const stats = [
-  { label: 'Years - Dermatology', value: 7, suffix: '+' },
-  { label: 'Years - Psychiatry', value: 7, suffix: '+' },
+  { label: 'Years - Dermatology', value: 8, suffix: '+' },
+  { label: 'Years - Psychiatry', value: 5, suffix: '+' },
   { label: 'Skin Procedures', value: 150, suffix: '+' },
-  { label: 'Patients Cared For', value: 5, suffix: 'k+' },
+  { label: 'Patients Cared For', value: 10, suffix: 'k+' },
 ]
 
 export const faqs = [

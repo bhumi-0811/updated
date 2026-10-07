@@ -1,24 +1,35 @@
+import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, Volume2, VolumeX } from 'lucide-react'
 import heroVideo from '../assets/video/hero-video.mp4'
-import heroPoster from '../assets/hero-poster.jpg'
 import wordmark from '../assets/vijaya-clinics-header-wordmark.png'
 
 export default function Hero() {
+  const videoRef = useRef(null)
+  const [soundEnabled, setSoundEnabled] = useState(false)
+
+  const toggleSound = async () => {
+    const next = !soundEnabled
+    setSoundEnabled(next)
+    if (videoRef.current) {
+      videoRef.current.muted = !next
+      if (next) await videoRef.current.play().catch(() => setSoundEnabled(false))
+    }
+  }
+
   return (
-    <section className="relative -mt-16 h-[100svh] min-h-[560px] w-full overflow-hidden lg:-mt-[76px]">
+    <section data-no-reveal className="relative -mt-16 h-[100svh] min-h-[560px] w-full overflow-hidden lg:-mt-[76px]">
       <div className="absolute inset-0">
         <video
+          ref={videoRef}
           className="h-full w-full object-cover motion-reduce:hidden"
           src={heroVideo}
-          poster={heroPoster}
           autoPlay
-          muted
+          muted={!soundEnabled}
           loop
           playsInline
+          preload="metadata"
         />
-        {/* Static fallback for reduced-motion preference - same framing, no motion */}
-        <img src={heroPoster} alt="" className="hidden h-full w-full object-cover motion-reduce:block" />
         <div className="absolute inset-0 bg-teal-950/[0.15]" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/30" />
       </div>
@@ -35,6 +46,17 @@ export default function Hero() {
             className="w-[min(42vw,18rem)] drop-shadow-[0_3px_18px_rgba(255,255,255,0.3)]"
           />
         </motion.div>
+
+        <button
+          type="button"
+          onClick={toggleSound}
+          aria-label={soundEnabled ? 'Mute background video' : 'Enable background video sound'}
+          aria-pressed={soundEnabled}
+          className="absolute bottom-8 right-6 z-10 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/40 bg-black/35 px-4 py-2 text-xs font-medium text-white backdrop-blur transition hover:bg-black/55 sm:bottom-10 sm:right-10"
+        >
+          {soundEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
+          {soundEnabled ? 'Sound on' : 'Enable sound'}
+        </button>
 
         <motion.p
           initial={{ opacity: 0, y: 16 }}

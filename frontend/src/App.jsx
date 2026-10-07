@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
 import FloatingButtons from './components/FloatingButtons.jsx'
+import ScrollAnimations from './components/ScrollAnimations.jsx'
 
 import Home from './pages/Home.jsx'
 import Dermatology from './pages/Dermatology.jsx'
@@ -36,7 +37,10 @@ function PublicLayout({ children }) {
     <SiteDataProvider>
       <div className="flex min-h-screen flex-col">
         <Navbar />
-        <main className="flex-1 pt-16 lg:pt-[76px]">{children}</main>
+        <main className="flex-1 pt-16 lg:pt-[76px]">
+          <ScrollAnimations />
+          <div className="page-enter">{children}</div>
+        </main>
         <Footer />
         <FloatingButtons />
       </div>

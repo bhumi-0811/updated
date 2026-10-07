@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import signage from '../assets/signage.jpg'
 import reception from '../assets/reception.jpg'
 import treatmentRoom from '../assets/treatment-room.jpg'
@@ -22,61 +23,114 @@ const images = [
 ]
 
 export default function CinematicGallery() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const activeImage = images[activeIndex]
-
-  const showPrevious = () => setActiveIndex((index) => (index - 1 + images.length) % images.length)
-  const showNext = () => setActiveIndex((index) => (index + 1) % images.length)
+  const galleryRef = useRef(null)
+  const [selectedIndex, setSelectedIndex] = useState(null)
+  const reduceMotion = useReducedMotion()
+  const { scrollYProgress } = useScroll({ target: galleryRef, offset: ['start end', 'end start'] })
+  const galleryY = useTransform(scrollYProgress, [0, 1], ['6%', '-6%'])
 
   return (
-    <section className="overflow-hidden bg-teal-900 py-20 sm:py-24">
+    <section ref={galleryRef} className="overflow-hidden bg-teal-900 py-20 sm:py-24">
       <div className="mx-auto max-w-[1600px] px-6 lg:px-8">
         <div className="mb-12 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-mint-300">A Look Inside</p>
           <h2 className="mt-3 font-display text-3xl font-semibold text-white sm:text-4xl">The Vijaya Clinics Experience</h2>
+          <p className="mx-auto mt-4 max-w-xl text-sm text-white/65">Explore the clinic, then select any photo to view it up close.</p>
         </div>
 
-        <div className="mx-auto max-w-5xl">
-          <div className="relative h-[52vh] min-h-[360px] overflow-hidden rounded-2xl shadow-soft sm:h-[58vh]">
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={activeImage.src}
-                initial={{ opacity: 0, scale: 1.035 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.35 }}
-                src={activeImage.src}
-                alt={activeImage.caption}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            </AnimatePresence>
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-teal-950/80 via-teal-950/20 to-transparent px-6 pb-7 pt-20 text-center">
-              <p className="text-sm font-medium text-white">{activeImage.caption}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-7 flex items-center justify-between gap-5 sm:mt-8">
-          <button type="button" onClick={showPrevious} className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-mint-300 transition hover:text-white">
-            <ChevronLeft size={17} /> Previous
-          </button>
-          <div className="flex items-center gap-2" aria-label={`Photo ${activeIndex + 1} of ${images.length}`}>
-            {images.map((image, index) => (
-              <button
-                type="button"
-                key={image.caption}
-                onClick={() => setActiveIndex(index)}
-                aria-label={`View ${image.caption}`}
-                aria-current={index === activeIndex ? 'true' : undefined}
-                className={`h-2 rounded-full transition-all ${index === activeIndex ? 'w-7 bg-mint-300' : 'w-2 bg-white/35 hover:bg-white/65'}`}
-              />
-            ))}
-          </div>
-          <button type="button" onClick={showNext} className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-mint-300 transition hover:text-white">
-            Next <ChevronRight size={17} />
-          </button>
+        <div className="overflow-hidden py-6">
+          <motion.div style={{ y: galleryY }} className="flex w-max gap-3 sm:gap-4">
+            <AutoScrollRow images={images} reduceMotion={reduceMotion} onSelect={setSelectedIndex} />
+          </motion.div>
         </div>
       </div>
+      {selectedIndex !== null && (
+        createPortal(
+          <PhotoViewer
+            image={images[selectedIndex]}
+            currentIndex={selectedIndex}
+            total={images.length}
+            onClose={() => setSelectedIndex(null)}
+            onPrevious={() => setSelectedIndex((selectedIndex - 1 + images.length) % images.length)}
+            onNext={() => setSelectedIndex((selectedIndex + 1) % images.length)}
+          />,
+          document.body,
+        )
+      )}
     </section>
+  )
+}
+
+function AutoScrollRow({ images: rowImages, reduceMotion, onSelect }) {
+  const loopedImages = [...rowImages, ...rowImages]
+
+  return (
+    <motion.div
+      animate={reduceMotion ? { x: 0 } : { x: ['0%', '-50%'] }}
+      transition={reduceMotion ? { duration: 0 } : { duration: 34, ease: 'linear', repeat: Infinity }}
+      className="flex w-max gap-3 sm:gap-4"
+    >
+      {loopedImages.map((image, index) => (
+        <figure key={`${image.caption}-${index}`} className="group relative h-[18rem] w-56 shrink-0 overflow-hidden rounded-2xl shadow-soft sm:h-[25rem] sm:w-72 lg:h-[29rem] lg:w-80">
+          <button
+            type="button"
+            onClick={() => onSelect(index % rowImages.length)}
+            aria-label={`View ${image.caption} photo`}
+            className="absolute inset-0 z-10 h-full w-full rounded-2xl focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-mint-300"
+          >
+            <img
+              src={image.src}
+              alt=""
+              loading="lazy"
+              className="h-full w-full object-cover object-center transition duration-700 ease-out group-hover:scale-105"
+            />
+          </button>
+          <figcaption aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-teal-950/90 via-teal-950/25 to-transparent px-2.5 pb-2.5 pt-8 text-left text-[11px] font-medium text-white opacity-100 sm:translate-y-2 sm:opacity-0 sm:transition sm:duration-300 sm:group-hover:translate-y-0 sm:group-hover:opacity-100">
+            {image.caption}
+          </figcaption>
+        </figure>
+      ))}
+    </motion.div>
+  )
+}
+
+function PhotoViewer({ image, currentIndex, total, onClose, onPrevious, onNext }) {
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') onClose()
+      if (event.key === 'ArrowLeft') onPrevious()
+      if (event.key === 'ArrowRight') onNext()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = previousOverflow
+    }
+  }, [onClose, onPrevious, onNext])
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 sm:p-8"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${image.caption} photo`}
+      onClick={(event) => { if (event.target === event.currentTarget) onClose() }}
+    >
+      <button type="button" onClick={onClose} aria-label="Close photo viewer" className="absolute right-4 top-4 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20 sm:right-6 sm:top-6">
+        <X size={22} />
+      </button>
+      <button type="button" onClick={onPrevious} aria-label="Previous photo" className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20 sm:left-6">
+        <ChevronLeft size={26} />
+      </button>
+      <figure className="flex max-h-full max-w-full flex-col items-center">
+        <img src={image.src} alt={image.caption} className="max-h-[78vh] max-w-[82vw] rounded-xl object-contain shadow-2xl" />
+        <figcaption className="mt-4 text-center text-sm font-medium text-white">{image.caption} <span className="ml-2 text-white/55">{currentIndex + 1} / {total}</span></figcaption>
+      </figure>
+      <button type="button" onClick={onNext} aria-label="Next photo" className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20 sm:right-6">
+        <ChevronRight size={26} />
+      </button>
+    </div>
   )
 }

@@ -6,12 +6,11 @@ import TreatmentCard from '../components/TreatmentCard.jsx'
 import ProcessSteps from '../components/ProcessSteps.jsx'
 import { dermatologist, allTreatments, dermatologyProcess } from '../utils/clinicData.js'
 import { useSiteData } from '../context/SiteDataContext.jsx'
-import doctorImgFallback from '../assets/dr-amit.jpg'
+import amitNikamPhoto from '../assets/dr-amit-nikam.png'
 import treatmentRoomImg from '../assets/treatment-room.jpg'
 
 export default function Dermatology() {
-  const { settings: clinic, doctor, treatments } = useSiteData()
-  const photo = doctor.photoUrl || doctorImgFallback
+  const { settings: clinic, treatments } = useSiteData()
   const treatmentList = (treatments.length ? treatments : allTreatments).slice(0, 9)
 
   return (
@@ -55,7 +54,7 @@ export default function Dermatology() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7 }}
-            src={photo}
+            src={amitNikamPhoto}
             alt={dermatologist.name}
             className="aspect-[4/5] w-full rounded-[2rem] object-cover shadow-soft"
           />
@@ -108,9 +107,14 @@ export default function Dermatology() {
             <span className="flex items-center gap-2"><MapPin size={15} /> {clinic.address}</span>
             <span className="flex items-center gap-2"><Phone size={15} /> {clinic.phone}</span>
           </div>
-          <Link to="/contact" className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-teal-700 shadow-soft transition hover:scale-105">
-            Contact Us
-          </Link>
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
+            <a href="https://www.eka.care/doctor/amit-nikam-dermatologist-nagpur?utm_source=ig&utm_medium=social&utm_campaign=web-navigation" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-teal-700 shadow-soft transition hover:scale-105">
+              Book with Dr. Amit
+            </a>
+            <Link to="/contact" className="inline-flex items-center gap-2 rounded-full border border-white/50 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+              Contact Us
+            </Link>
+          </div>
         </div>
       </section>
     </div>

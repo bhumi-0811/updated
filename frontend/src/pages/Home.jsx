@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { MapPin, Phone, Mail } from 'lucide-react'
@@ -7,12 +7,65 @@ import SectionHeading from '../components/SectionHeading.jsx'
 import CinematicGallery from '../components/CinematicGallery.jsx'
 import { dermatologist, psychiatrist } from '../utils/clinicData.js'
 import { useSiteData } from '../context/SiteDataContext.jsx'
-import doctorImgFallback from '../assets/dr-amit.jpg'
-import prithishaImg from '../assets/dr-pritisha.jpg'
+import amitNikamPhoto from '../assets/dr-amit-nikam.png'
+import prithishaImg from '../assets/dr-pritisha.png'
+import clinicInteriorImg from '../assets/interior-1.jpg'
+import clinicReceptionImg from '../assets/treatment-room-2.jpg'
 import specialistLedIcon from '../assets/why-vijaya/specialist-led-care.png'
 import personalisedAttentionIcon from '../assets/why-vijaya/personalised-attention.png'
-import evidenceBasedIcon from '../assets/why-vijaya/evidence-based-approach.png'
+import evidenceBasedIcon from '../assets/why-vijaya/evidence-document-search.png'
 import skinMindTogetherIcon from '../assets/why-vijaya/skin-mind-together.png'
+
+const aboutStats = [
+  { value: 8, suffix: '+', label: 'Years - Dermatology' },
+  { value: 5, suffix: '+', label: 'Years - Psychiatry' },
+  { value: 150, suffix: '+', label: 'Skin Procedures' },
+  { value: 10, suffix: 'k+', label: 'Patients Cared For' },
+]
+
+function CountUp({ value, suffix }) {
+  const countRef = useRef(null)
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    const element = countRef.current
+    if (!element) return
+
+    let frameId
+    let startedAt
+    let hasAnimated = false
+
+    const animateCount = (timestamp) => {
+      if (!startedAt) startedAt = timestamp
+      const progress = Math.min((timestamp - startedAt) / 1400, 1)
+      const easedProgress = 1 - (1 - progress) ** 3
+      setCount(Math.round(value * easedProgress))
+
+      if (progress < 1) frameId = requestAnimationFrame(animateCount)
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting || hasAnimated) return
+      hasAnimated = true
+      observer.disconnect()
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        setCount(value)
+        return
+      }
+
+      frameId = requestAnimationFrame(animateCount)
+    }, { threshold: 0.5 })
+
+    observer.observe(element)
+    return () => {
+      observer.disconnect()
+      if (frameId) cancelAnimationFrame(frameId)
+    }
+  }, [value])
+
+  return <span ref={countRef}>{count}{suffix}</span>
+}
 
 const whyUs = [
   { icon: specialistLedIcon, title: 'Specialist-Led Care', desc: 'Every consultation is led directly by a specialist - dermatology and psychiatry, under one roof.' },
@@ -22,8 +75,7 @@ const whyUs = [
 ]
 
 export default function Home() {
-  const { settings: clinic, doctor } = useSiteData()
-  const amitPhoto = doctor.photoUrl || doctorImgFallback
+  const { settings: clinic } = useSiteData()
   const galleryRef = useRef(null)
   const [searchParams] = useSearchParams()
 
@@ -37,8 +89,68 @@ export default function Home() {
     <div>
       <Hero />
 
+      {/* About Vijaya Clinics */}
+      <section className="overflow-hidden bg-white px-6 py-24 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-20">
+            <div className="relative mx-auto w-full max-w-md pb-10 pl-0 sm:pl-10">
+              <motion.img
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.7 }}
+                src={clinicInteriorImg}
+                alt="Inside Vijaya Clinics"
+                className="relative z-10 aspect-[4/5] w-full rounded-tl-3xl rounded-br-3xl object-cover shadow-soft"
+              />
+              <motion.img
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.7, delay: 0.15 }}
+                src={clinicReceptionImg}
+                alt="Vijaya Clinics reception"
+                className="absolute bottom-0 left-0 z-20 aspect-square w-[42%] rounded-2xl border-4 border-white object-cover shadow-card"
+              />
+              <div className="absolute bottom-6 right-0 z-20 w-48 translate-x-2 rounded-2xl bg-teal-800/90 px-5 py-4 text-white shadow-soft backdrop-blur sm:right-2">
+                <p className="font-display text-3xl font-bold">2</p>
+                <p className="mt-1 text-xs leading-snug text-white/85">Specialities under one calm, considered roof</p>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-teal-500">About Vijaya Clinics</p>
+              <h2 className="mt-3 font-display text-3xl font-semibold text-teal-800 sm:text-4xl">
+                Where <span className="text-teal-500">skin care</span> meets <span className="text-teal-500">peace of mind</span>
+              </h2>
+              <p className="mt-6 max-w-2xl text-ink/70">
+                Vijaya Clinics was founded on a simple observation: skin conditions and mental wellbeing are rarely unrelated. Stress surfaces on the skin, and skin concerns weigh on the mind. Our clinic in Nagpur brings both kinds of specialist care into one calm, considered space.
+              </p>
+              <p className="mt-4 max-w-2xl text-ink/70">
+                Led by a dermatologist and a psychiatrist working under a single clinic identity, Vijaya Clinics is built around evidence-based care, modern equipment, and the belief that patients deserve to be treated as whole people - not just symptoms.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-16 grid grid-cols-2 gap-y-8 rounded-[2rem] bg-teal-fade px-8 py-10 text-center text-white sm:grid-cols-4 sm:gap-4">
+            {aboutStats.map((s, index) => (
+              <motion.div
+                key={s.label}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.5, delay: 0.08 * index }}
+              >
+                <p className="font-display text-3xl font-bold sm:text-4xl"><CountUp value={s.value} suffix={s.suffix} /></p>
+                <p className="mt-1 text-xs text-white/85 sm:text-sm">{s.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Meet Our Specialists */}
-      <section className="bg-sand-50 pt-24">
+      <section id="specialists" className="bg-sand-50 pt-24">
         <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
           <SectionHeading title="Meet Our Specialists" />
         </div>
@@ -54,7 +166,7 @@ export default function Home() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.7 }}
-              src={amitPhoto}
+              src={amitNikamPhoto}
               alt={dermatologist.name}
               className="relative ml-auto aspect-[4/5] w-[92%] rounded-tl-xl rounded-br-xl object-cover shadow-soft"
             />

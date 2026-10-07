@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Loader2, Lock, Mail, Eye, EyeOff } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext.jsx'
-import logo from '../../assets/logo.png'
+import logo from '../../assets/vijaya-clinics-logo.png'
 
 export default function Login() {
   const [email, setEmail] = useState('')

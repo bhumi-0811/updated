@@ -29,10 +29,10 @@ export default function FloatingButtons() {
       <a
         href={`tel:${clinic.phone}`}
         aria-label="Call clinic"
-        className="rounded-full bg-teal-600 p-3 text-white shadow-card transition hover:scale-110 sm:p-3.5"
+        className="call-button rounded-full bg-teal-600 p-3 text-white shadow-card transition hover:scale-110 sm:p-3.5"
       >
-        <Phone size={18} className="sm:hidden" />
-        <Phone size={20} className="hidden sm:block" />
+        <Phone size={18} className="call-button-icon sm:hidden" />
+        <Phone size={20} className="call-button-icon hidden sm:block" />
       </a>
     </div>
   )
